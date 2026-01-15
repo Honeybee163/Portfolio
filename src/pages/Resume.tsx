@@ -82,10 +82,10 @@ const Resume = () => {
           <div className="mb-4">
             <div className="flex justify-between items-start">
               <div>
-                <h3 className="font-semibold text-gray-800">Python Developer Intern</h3>
-                <p className="text-sm text-gray-600 italic">Codsoft</p>
+                <h3 className="font-semibold text-gray-800">Software Developer Intern</h3>
+                <p className="text-sm text-gray-600 italic">Moonsys</p>
               </div>
-              <span className="text-sm text-gray-500">2024</span>
+              <span className="text-sm text-gray-500">2025</span>
             </div>
             <ul className="list-disc list-inside text-sm text-gray-700 mt-2 space-y-1">
               <li>Developed Python applications focusing on automation and data processing</li>
