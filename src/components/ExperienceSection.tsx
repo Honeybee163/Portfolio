@@ -49,57 +49,75 @@ const ExperienceSection = () => {
           {/* Timeline line */}
           <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border md:-translate-x-1/2" />
 
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className={`relative pl-8 md:pl-0 pb-12 last:pb-0 ${
-                index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12 md:ml-1/2"
-              }`}
-              style={{
-                marginLeft: index % 2 === 1 ? "50%" : 0,
-                paddingRight: index % 2 === 0 ? "calc(50% + 1.5rem)" : 0,
-              }}
-            >
-              {/* Timeline dot */}
-              <div className="absolute left-0 md:left-1/2 top-0 w-3 h-3 rounded-full bg-primary md:-translate-x-1/2 -translate-x-1/2 animate-pulse-glow" 
-                   style={{ left: index % 2 === 0 ? "auto" : 0, right: index % 2 === 0 ? "-6px" : "auto" }} />
+         {experiences.map((exp, index) => {
+  const isLeft = index % 2 === 0;
 
-              <div className="glass-card p-6 rounded-xl">
-                <div className={`flex items-center gap-2 text-primary mb-2 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
-                  <Briefcase size={16} />
-                  <span className="font-semibold">{exp.title}</span>
-                </div>
-                
-                <h3 className="text-lg font-display font-semibold text-foreground mb-2">
-                  {exp.company}
-                </h3>
-                
-                <div className={`flex flex-wrap gap-4 text-sm text-muted-foreground mb-4 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
-                  <span className="flex items-center gap-1">
-                    <Calendar size={14} />
-                    {exp.period}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <MapPin size={14} />
-                    {exp.location}
-                  </span>
-                </div>
-                
-                <ul className={`space-y-2 text-sm text-muted-foreground ${index % 2 === 0 ? "md:text-right" : ""}`}>
-                  {exp.points.map((point, pointIndex) => (
-                    <li key={pointIndex} className="flex items-start gap-2">
-                      <span className="text-primary mt-1.5 flex-shrink-0">•</span>
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
+  return (
+    <motion.div
+      key={index}
+      initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.2 }}
+      className={`relative pb-12 last:pb-0
+        md:w-1/2
+        ${isLeft ? "md:pr-12 md:text-right" : "md:pl-12 md:ml-auto"}
+      `}
+    >
+      {/* Timeline dot */}
+      <div
+        className={`absolute top-1 w-3 h-3 rounded-full bg-primary animate-pulse-glow
+          left-0 -translate-x-1/2
+          md:left-1/2 md:-translate-x-1/2
+        `}
+      />
+
+      <div className="glass-card p-6 rounded-xl w-full">
+        <div
+          className={`flex items-center gap-2 text-primary mb-2 ${
+            isLeft ? "md:justify-end" : ""
+          }`}
+        >
+          <Briefcase size={16} />
+          <span className="font-semibold">{exp.title}</span>
+        </div>
+
+        <h3 className="text-lg font-display font-semibold mb-2">
+          {exp.company}
+        </h3>
+
+        <div
+          className={`flex flex-wrap gap-4 text-sm text-muted-foreground mb-4 ${
+            isLeft ? "md:justify-end" : ""
+          }`}
+        >
+          <span className="flex items-center gap-1">
+            <Calendar size={14} />
+            {exp.period}
+          </span>
+          <span className="flex items-center gap-1">
+            <MapPin size={14} />
+            {exp.location}
+          </span>
+        </div>
+
+        <ul
+          className={`space-y-2 text-sm text-muted-foreground ${
+            isLeft ? "md:text-right" : ""
+          }`}
+        >
+          {exp.points.map((point, i) => (
+            <li key={i} className="flex items-start gap-2">
+              <span className="text-primary mt-1.5">•</span>
+              <span>{point}</span>
+            </li>
           ))}
+        </ul>
+      </div>
+    </motion.div>
+  );
+})}
+
         </div>
       </div>
     </section>
